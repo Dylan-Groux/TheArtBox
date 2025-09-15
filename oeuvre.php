@@ -1,38 +1,42 @@
 <?php
     require 'header.php';
-    require 'oeuvres.php';
+    require_once 'services/bddManager.php';
+    require_once 'services/imageManager.php';
+    require_once 'services/oeuvreManager.php';
+    
+    $id = $_GET['id'] ?? null; // Récupération de l'id dans l'URL (ex: oeuvre.php?id=3)
+
+    define('INDEX_PATH_REDIRECTION', 'Location: index.php');
 
     // Si l'URL ne contient pas d'id, on redirige sur la page d'accueil
-    if(empty($_GET['id'])) {
-        header('Location: index.php');
+    if(empty($id)) {
+        header(INDEX_PATH_REDIRECTION);
+    } elseif (!is_numeric($id) || $id <= 0) {
+        header(INDEX_PATH_REDIRECTION);
+        exit;
     }
 
-    $oeuvre = null;
-
-    // On parcourt les oeuvres du tableau afin de rechercher celle qui a l'id précisé dans l'URL
-    foreach($oeuvres as $o) {
-        // intval permet de transformer l'id de l'URL en un nombre (exemple : "2" devient 2)
-        if($o['id'] === intval($_GET['id'])) {
-            $oeuvre = $o;
-            break; // On stoppe le foreach si on a trouvé l'oeuvre
-        }
-    }
+    $imageManager = new ImageManager();
+    $oeuvres = OeuvreManager::getOeuvreById($id);
 
     // Si aucune oeuvre trouvé, on redirige vers la page d'accueil
-    if(is_null($oeuvre)) {
-        header('Location: index.php');
+    if(is_null($oeuvres)) {
+        header(INDEX_PATH_REDIRECTION);
+    } elseif ($oeuvres['id'] != $id) {
+        header(INDEX_PATH_REDIRECTION);
+        exit;
     }
 ?>
 
 <article id="detail-oeuvre">
     <div id="img-oeuvre">
-        <img src="<?= $oeuvre['image'] ?>" alt="<?= $oeuvre['titre'] ?>">
+        <img src="<?= $imageManager->getImagePath($oeuvres['image_id']) ?>" alt="<?= htmlspecialchars($oeuvres['titre']) ?>">
     </div>
     <div id="contenu-oeuvre">
-        <h1><?= $oeuvre['titre'] ?></h1>
-        <p class="description"><?= $oeuvre['artiste'] ?></p>
+        <h1><?= htmlspecialchars($oeuvres['titre']) ?></h1>
+        <p class="description"><?= htmlspecialchars($oeuvres['artiste']) ?></p>
         <p class="description-complete">
-             <?= $oeuvre['description'] ?>
+             <?= htmlspecialchars($oeuvres['description']) ?>
         </p>
     </div>
 </article>
