@@ -1,4 +1,5 @@
 <?php
+// Gère les opérations liées aux œuvres d'art, telles que la récupération, l'ajout et la mise à jour des œuvres dans la base de données.
 class OeuvreManager {
     public static function getOeuvreById($id) {
         $db = Database::getInstance()->getConnection();
@@ -21,10 +22,5 @@ class OeuvreManager {
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':image_id', $imageId);
         return $stmt->execute();
-    }
-    
-    public static function getLastInsertId() {
-        $db = Database::getInstance()->getConnection();
-        return $db->lastInsertId();
     }
 }

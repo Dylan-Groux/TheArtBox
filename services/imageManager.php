@@ -1,4 +1,5 @@
 <?php
+// Gère les opérations liées aux images, telles que l'upload, la récupération en base de données.
 class ImageManager{
     public static function getImagePath($imageId) {
         $db = Database::getInstance()->getConnection();

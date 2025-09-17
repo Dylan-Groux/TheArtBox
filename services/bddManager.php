@@ -10,6 +10,7 @@ class Database {
         $username = 'root';
         $password = '';
 
+        // Connexion à la base de données avec gestion des erreurs
         try {
             $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -31,6 +32,12 @@ class Database {
 
     public function getConnection() {
         return $this->pdo;
+    }
+
+    // méthode pour obtenir le dernier ID inséré
+    public static function getLastInsertId() {
+        $db = Database::getInstance()->getConnection();
+        return $db->lastInsertId();
     }
 }
 

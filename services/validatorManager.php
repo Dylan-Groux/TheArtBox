@@ -1,5 +1,6 @@
 <?php 
-class validatorManager {
+// Gère la validation des données des œuvres d'art avant leur insertion dans la base de données.
+class ValidatorManager {
     public static function validateOeuvreData($titre, $artiste, $image, $description) {
         $errors = [];
 

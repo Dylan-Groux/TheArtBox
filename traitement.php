@@ -4,11 +4,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require 'services/bddManager.php';
     require_once 'services/imageManager.php';
     require_once 'services/oeuvreManager.php';
-    require_once 'services/validatorManager.php';
+    require_once 'services/ValidatorManager.php';
 
     $oeuvreManager = new OeuvreManager();
     $imageManager = new ImageManager();
-    $validatorManager = new validatorManager();
+    $validatorManager = new ValidatorManager();
 
     // Récupération des données du formulaire
     $titre = $_POST['titre'] ?? '';
@@ -19,11 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validation des données
     $errors = $validatorManager->validateOeuvreData($titre, $artiste, $image, $description);
 
+    // Tentative d'insertion dans la base de données si pas d'erreurs
     try {
         $imageId = $imageManager->saveImage($image, "url", 0);
         if ($imageId) {
             $oeuvreManager->saveOeuvre($titre, $artiste, $description, $imageId);
-            $newOeuvreId = $oeuvreManager->getLastInsertId();
+            $newOeuvreId = Database::getLastInsertId();
             header('Location: oeuvre.php?id=' . $newOeuvreId);
             exit;
         } else {
