@@ -11,10 +11,10 @@
 <div id="liste-oeuvres">
     <?php foreach($oeuvres as $oeuvre): ?>
         <article class="oeuvre">
-            <a href="oeuvre.php?id=<?= $oeuvre['id'] ?>">
-                <img src="<?= $imageManager->getImagePath($oeuvre['image_id']) ?>" alt="<?= $oeuvre['titre'] ?>">
-                <h2><?= $oeuvre['titre'] ?></h2>
-                <p class="description"><?= $oeuvre['artiste'] ?></p>
+            <a href="oeuvre.php?id=<?= htmlspecialchars($oeuvre['id']) ?>">
+                <img src="<?= htmlspecialchars($imageManager->getImagePath($oeuvre['image_id'])) ?>" alt="<?= htmlspecialchars($oeuvre['titre']) ?>">
+                <h2><?= htmlspecialchars($oeuvre['titre']) ?></h2>
+                <p class="description"><?= htmlspecialchars($oeuvre['artiste']) ?></p>
             </a>
         </article>
     <?php endforeach; ?>

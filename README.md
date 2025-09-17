@@ -1,13 +1,73 @@
-# The ArtBox
+# 🎨 The ArtBox
 
-Ce projet contient : 
-* Le code initial du projet The ArtBox pour réaliser le projet 4 du parcours PHP/Symfony sur la branche `main`.
-* Les corrections des différentes étapes sur les branches `correction-etapeX` (avec X le numéro de l'étape).
+![PHP version](https://img.shields.io/badge/PHP-7%2B-blue?logo=php)
+![GitHub last commit](https://img.shields.io/github/last-commit/Dylan-Groux/TheArtBox)
+![The Art Box](https://img.shields.io/badge/The%20Art%20Box-Projet%20PHP-orange?style=for-the-badge)
 
-## Installation du projet
+> **Projet PHP pour la galerie d'art The ArtBox**  
+> Réalisé dans le cadre du parcours Développeur d’application Full-stack d'OpenClassrooms.
 
-Pour installer ce projet : 
-1. Télécharger le projet en cliquant sur le bouton "Code" ci-dessus puis "Download ZIP".
-2. Dézipper le projet et placez-le dans le dossier contenant vos projets PHP habituels.
-3. Ouvrir le projet dans le navigateur via l'adresse http://localhost/NOM_DU_DOSSIER (ou autre selon votre configuration)
-4. Ouvrir le projet dans votre IDE (exemple : VSCode) pour réaliser les prochaines étapes.
+---
+
+## 📁 Structure du projet
+
+```
+├── ajouter.php
+├── footer.php
+├── header.php
+├── index.php
+├── oeuvre.php
+├── README.md
+├── css/
+│   └── style.css
+├── img/
+│   └── [images d'oeuvres et logo]
+├── services/
+│   ├── bddManager.php
+│   ├── imageManager.php
+│   └── oeuvreManager.php
+
+```
+
+---
+
+## 🚀 Installation
+
+1. **Cloner le dépôt**
+    ```bash
+    git clone https://github.com/Dylan-Groux/TheArtBox.git
+    ```
+2. **Placer le dossier** dans votre répertoire de projets PHP (`www`, `htdocs`, etc.).
+3. **Lancer le serveur local** (WAMP, XAMPP, MAMP...).
+4. **Accéder au projet** via [http://localhost/TheArtBox](http://localhost/TheArtBox) ou selon votre configuration.
+
+---
+
+## 🖼️ Fonctionnalités
+
+- Affichage des œuvres d'art
+- Ajout d'une œuvre
+- Visualisation détaillée
+- Structure MVC simplifiée
+
+---
+
+## 🛠️ Technologies
+
+- PHP natif
+- HTML / CSS
+- MySQL classique via phpMyAdmin
+
+---
+
+## 📚 Branches
+
+- `main` : code initial
+
+---
+
+## 🔗 Liens utiles
+
+- [OpenClassrooms - Parcours PHP/Symfony](https://openclassrooms.com/fr/paths/518-developpeur-dapplication-php-symfony)
+- [Mon dépôt GitHub](https://github.com/Dylan-Groux/TheArtBox)
+- [Dépôt original OpenClassrooms](https://github.com/OpenClassrooms-Student-Center/PHP-P4-exercice.git)

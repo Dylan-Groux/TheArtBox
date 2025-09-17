@@ -1,7 +1,8 @@
 <?php
+// Singleton class pour gérer la connexion à la base de données
 class Database {
-    private static $instance = null;
-    private $pdo;
+    private static ?Database $instance = null;
+    private \PDO $pdo;
 
     private function __construct() {
         $host = 'localhost';
