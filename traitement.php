@@ -20,22 +20,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = $validatorManager->validateOeuvreData($titre, $artiste, $image, $description);
 
     // Tentative d'insertion dans la base de données si pas d'erreurs
-    try {
-        $imageId = $imageManager->saveImage($image, "url", 0);
-        if ($imageId) {
-            $oeuvreManager->saveOeuvre($titre, $artiste, $description, $imageId);
-            $newOeuvreId = Database::getLastInsertId();
-            header('Location: oeuvre.php?id=' . $newOeuvreId);
-            exit;
+    if (empty($errors)) {
+        try {
+                $imageId = $imageManager->saveImage($image, "url", 0);
+                if ($imageId) {
+                    $oeuvreManager->saveOeuvre($titre, $artiste, $description, $imageId);
+                    $newOeuvreId = Database::getLastInsertId();
+                    header('Location: oeuvre.php?id=' . $newOeuvreId);
+                    exit;
+                } else {
+                    die('Erreur lors de l\'ajout de l\'image.');
+                    header('Location: ajouter.php');
+                    exit;
+                }
+            } catch (PDOException $e) {
+                echo "Erreur lors de l'ajout de l'œuvre : " . $e->getMessage();
+            }
         } else {
-            die('Erreur lors de l\'ajout de l\'image.');
-            header('Location: ajouter.php');
-            exit;
+            echo "Méthode de requête non autorisée.";
         }
-        var_dump($stmtImage);
-    } catch (PDOException $e) {
-        echo "Erreur lors de l'ajout de l'œuvre : " . $e->getMessage();
+    } else {
+        // Affichage des erreurs de validation
+        foreach ($errors as $error) {
+            echo "<p style='color:red;'>$error</p>";
+        }
+        echo "<p><a href='ajouter.php'>Retour au formulaire</a></p>";
     }
-} else {
-    echo "Méthode de requête non autorisée.";
-}
