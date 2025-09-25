@@ -2,7 +2,7 @@
 require 'header.php';
 ?>
 
-<form action="<?= BASE_URL . '/src/controller/traitement.php' ?>" method="POST">
+<form action="<?= BASE_URL . '/index.php?route=traitement' ?>" method="POST">
     <div class="champ-formulaire">
         <label for="titre">Titre de l'œuvre</label>
         <input type="text" name="titre" id="titre">
@@ -12,8 +12,8 @@ require 'header.php';
         <input type="text" name="artiste" id="artiste">
     </div>
     <div class="champ-formulaire">
-        <label for="image">URL de l'image</label>
-        <input type="url" name="image" id="image">
+        <label for="image_path">URL de l'image</label>
+        <input type="url" name="image_path" id="image_path">
     </div>
     <div class="champ-formulaire">
         <label for="description">Description</label>

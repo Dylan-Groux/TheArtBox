@@ -11,11 +11,11 @@
 </head>
 <body>
 <header>
-    <a href="<?= BASE_URL ?>/index.php"><img src="<?= BASE_URL ?>/assets/img/logo.png" alt="Logo Artbox" id="logo"></a>
+    <a href="<?= BASE_URL ?>/index.php?route=home"><img src="<?= BASE_URL ?>/assets/img/logo.png" alt="Logo Artbox" id="logo"></a>
     <nav>
         <ul>
-            <li><a href="<?= BASE_URL ?>/index.php">Accueil</a></li>
-            <li><a href="<?= BASE_URL ?>/src/templates/ajouter.php">Ajouter une œuvre</a></li>
+            <li><a href="<?= BASE_URL ?>/index.php?route=home">Accueil</a></li>
+            <li><a href="<?= BASE_URL ?>/index.php?route=ajouter">Ajouter une œuvre</a></li>
         </ul>
     </nav>
 </header>

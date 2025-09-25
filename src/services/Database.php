@@ -5,7 +5,9 @@ namespace App\Services;
 use PDO;
 use PDOException;
 
-// Singleton class pour gérer la connexion à la base de données
+/**
+ * Gère la connexion à la base de données en utilisant le pattern Singleton.
+ */
 class Database {
 
     private static ?Database $instance = null;
