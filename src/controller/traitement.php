@@ -1,13 +1,20 @@
 <?php
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    require 'services/bddManager.php';
-    require_once 'services/imageManager.php';
-    require_once 'services/oeuvreManager.php';
-    require_once 'services/ValidatorManager.php';
+namespace App\Controller;
 
+require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
+require_once dirname(__DIR__, 2) . '/config.php';
+
+use App\Services\OeuvreManager;
+use App\Services\ValidatorManager;
+use App\Services\Database;
+use PDOException;
+
+$db = Database::getInstance()->getConnection();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+    {
     $oeuvreManager = new OeuvreManager();
-    $imageManager = new ImageManager();
     $validatorManager = new ValidatorManager();
 
     // Récupération des données du formulaire
@@ -22,17 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Tentative d'insertion dans la base de données si pas d'erreurs
     if (empty($errors)) {
         try {
-                $imageId = $imageManager->saveImage($image, "url", 0);
-                if ($imageId) {
-                    $oeuvreManager->saveOeuvre($titre, $artiste, $description, $imageId);
-                    $newOeuvreId = Database::getLastInsertId();
-                    header('Location: oeuvre.php?id=' . $newOeuvreId);
-                    exit;
-                } else {
-                    die('Erreur lors de l\'ajout de l\'image.');
-                    header('Location: ajouter.php');
-                    exit;
-                }
+                $oeuvreManager->saveOeuvre($titre, $artiste, $description, $image);
+                $newOeuvreId = $db->lastInsertId();
+                header('Location:' . BASE_URL . '/src/templates/oeuvre.php?id=' . $newOeuvreId);
+                exit;
             } catch (PDOException $e) {
                 echo "Erreur lors de l'ajout de l'œuvre : " . $e->getMessage();
             }

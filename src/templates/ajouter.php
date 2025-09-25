@@ -1,8 +1,8 @@
-<?php 
+<?php
 require 'header.php';
 ?>
 
-<form action="traitement.php" method="POST">
+<form action="<?= BASE_URL . '/src/controller/traitement.php' ?>" method="POST">
     <div class="champ-formulaire">
         <label for="titre">Titre de l'œuvre</label>
         <input type="text" name="titre" id="titre">
@@ -24,3 +24,4 @@ require 'header.php';
 </form>
 
 <?php require 'footer.php'; ?>
+

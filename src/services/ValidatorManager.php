@@ -1,7 +1,10 @@
-<?php 
+<?php
+
+namespace App\Services;
+
 // Gère la validation des données des œuvres d'art avant leur insertion dans la base de données.
 class ValidatorManager {
-    public static function validateOeuvreData($titre, $artiste, $image, $description) {
+    public function validateOeuvreData(string $titre, string $artiste, string $image, string $description): array {
         $errors = [];
 
         if (empty($titre)) {
@@ -22,12 +25,8 @@ class ValidatorManager {
             $errors[] = "La description de l'œuvre est requise.";
         }
 
-        if (strlen($description) < 3) {
+        if (strlen($description) <= 3) {
             $errors[] = "La description doit contenir au moins 3 caractères.";
-        }
-
-        if (!filter_var($image, FILTER_VALIDATE_URL)) {
-            $errors[] = "L'URL de l'image n'est pas valide.";
         }
 
         return $errors;

@@ -1,6 +1,13 @@
 <?php
+
+namespace App\Services;
+
+use PDO;
+use PDOException;
+
 // Singleton class pour gérer la connexion à la base de données
 class Database {
+
     private static ?Database $instance = null;
     private \PDO $pdo;
 
@@ -33,13 +40,6 @@ class Database {
     public function getConnection() {
         return $this->pdo;
     }
-
-    // méthode pour obtenir le dernier ID inséré
-    public static function getLastInsertId() {
-        $db = Database::getInstance()->getConnection();
-        return $db->lastInsertId();
-    }
 }
-
 
 
