@@ -12,21 +12,33 @@
 ## 📁 Structure du projet
 
 ```
-├── ajouter.php
-├── footer.php
-├── header.php
 ├── index.php
-├── oeuvre.php
+├── config.php
 ├── README.md
-├── css/
-│   └── style.css
-├── img/
-│   └── [images d'oeuvres et logo]
-├── services/
-│   ├── bddManager.php
-│   ├── imageManager.php
-│   └── oeuvreManager.php
-
+├── .gitignore
+├── vendor/
+│   └── [dépendances Composer]
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   └── img/
+│       └── [images d'oeuvres et logo]
+├── src/
+│   ├── controller/
+│   │   └── TraitementController.php
+│   ├── model/
+│   │   └── OeuvreData.php
+│   ├── services/
+│   │   ├── Database.php
+│   │   ├── HandleSubmissionsManager.php
+│   │   ├── OeuvreManager.php
+│   │   └── ValidatorManager.php
+│   └── templates/
+│       ├── ajouter.php
+│       ├── footer.php
+│       ├── header.php
+│       ├── home.php
+│       └── oeuvre.php
 ```
 
 ---
@@ -38,8 +50,14 @@
     git clone https://github.com/Dylan-Groux/TheArtBox.git
     ```
 2. **Placer le dossier** dans votre répertoire de projets PHP (`www`, `htdocs`, etc.).
-3. **Lancer le serveur local** (WAMP, XAMPP, MAMP...).
-4. **Accéder au projet** via [http://localhost/TheArtBox](http://localhost/TheArtBox) ou selon votre configuration.
+3. **Installer les dépendances Composer**
+    ```bash
+    composer install
+    ```
+4. **Configurer votre base de données**
+    - Renseignez vos chemin relatif dans `config.php` (non versionné).
+5. **Lancer le serveur local** (WAMP, XAMPP, MAMP...).
+6. **Accéder au projet** via [http://localhost/TheArtBox](http://localhost/TheArtBox) ou selon votre configuration.
 
 ---
 
@@ -49,20 +67,29 @@
 - Ajout d'une œuvre
 - Visualisation détaillée
 - Structure MVC simplifiée
+- Validation des formulaires
+- Gestion centralisée des soumissions
 
 ---
 
 ## 🛠️ Technologies
 
-- PHP natif
+- PHP natif (PSR, SOLID, Clean Code)
 - HTML / CSS
-- MySQL classique via phpMyAdmin
+- MySQL via phpMyAdmin
+- Composer (autoload, dépendances)
 
 ---
 
 ## 📚 Branches
 
 - `main` : code initial
+
+---
+
+## 🔒 Sécurité & bonnes pratiques
+
+- `config.php` est ignoré par Git (`.gitignore`) pour protéger mes identifiants.
 
 ---
 
